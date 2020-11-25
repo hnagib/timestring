@@ -1,19 +1,19 @@
-# Project Title
+# TimeString
 
-Project description 
+Interactive time series visualization
 
 :open_file_folder: Repo Organization
 --------------------------------
 
-    ├── src                <- Modules used in and shared by different lectures & assignments
+    ├── src                
     │   ├── ...       
     │   └── ...            
     │
-    ├── notebooks          <- Jupyter notebooks for each lecture
+    ├── notebooks          
     │   ├── ...            
     │   └── ...            
     │
-    ├── data               <- Directory for storing small datasets and staging larger ones
+    ├── data               
     │   ├── ...       
     │   └── ... 
     │
