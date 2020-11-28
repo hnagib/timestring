@@ -14,7 +14,36 @@ template = """
 
   <head>
     <style>
-    
+    .h1 {
+    style=font-family:helvetica; 
+    color:grey; 
+    font-size:28px; 
+    font-weight:bold;
+    margin-top: 10px; 
+    }
+    .text {
+        style=font-family:helvetica; 
+        color:grey; 
+        float: left;
+        margin-top: 10px; 
+    }
+    .h2 {
+        style=font-family:helvetica; 
+        color:grey; 
+        font-size:16px; 
+        font-weight:bold;
+        margin-top: 10px; 
+    }
+
+    .para {
+        style=font-family:helvetica;
+        font-size:12px; 
+        color:grey; 
+        margin-left: 40px; 
+        width: 400px; 
+        float: left;
+    }
+
     .node {
         cursor: pointer;
     }
@@ -33,6 +62,30 @@ template = """
       fill: none;
       stroke: #BBBFCA;
       stroke-width: 3px;
+    }
+
+    a.url:link {
+      color: #e73360;
+      background-color: transparent;
+      text-decoration: none;
+    }
+
+    a.url:visited {
+      color: #e73360;
+      background-color: transparent;
+      text-decoration: none;
+    }
+
+    a.url:hover {
+      color: #154ba6;
+      background-color: transparent;
+      text-decoration: none;
+    }
+
+    a.url:active {
+      color: #e73360;
+      background-color: transparent;
+      text-decoration: underline;
     }
     
     </style>
@@ -63,6 +116,7 @@ template = """
 {% endblock %}
 {% block body %}
 <body>
+<div style="font-size:12px; font-family:helvetica; color:grey; margin-left: 40px; width: 900px; float: left;">
     {% block inner_body %}
     {% block contents %}
         {% for doc in docs %}
@@ -74,6 +128,7 @@ template = """
     {% endblock %}
     {{ plot_script | indent(8) }}
     {% endblock %}
+</div>
 </body>
 {% endblock %}
 </html>
@@ -355,4 +410,24 @@ dist_calc = """
             
             cds_tsplot.change.emit();
             cds_selection_summary_data.change.emit();
+"""
+
+
+div_head = """
+<h1 class="h1">TimeString</h1>
+<div style="font-size:12px; font-family:helvetica; color:grey; margin-left: 40px; width: 900px; float: left;">
+<p>
+An interactive time series explorer using Bokeh and D3.js. Select a segment
+of the time series to analysis. 
+
+</p><p>
+Features:
+<ul>
+<li>Runs linear regression for all variables in the selected segment</li>
+<li>Sort variables by trend over selected segment, number of upper/lower control limit violations</li>
+<li>Calculate <a href="https://en.wikipedia.org/wiki/Dynamic_time_warping" class="url">Dynamic Time Wrapping<a> or Euclidean distance for selected variable segment against all other variables</li>
+<li>Compute agglomerative <a href="https://en.wikipedia.org/wiki/Hierarchical_clustering#:~:text=In%20data%20mining%20and%20statistics,build%20a%20hierarchy%20of%20clusters." class="url">heirarchical clustering</a> for selected segments and display results in a d3.js dendogram</li>
+</ul>
+</p>
+</div>
 """
