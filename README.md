@@ -18,7 +18,7 @@ Features:
     │   └── ts-cluster.html         <-- Dashboard 
     │
     ├── notebooks          
-    │   ├── hn-crete-dash.ipynb     <-- Create dashboard        
+    │   ├── hn-create-dash.ipynb     <-- Create dashboard        
     │   └── ...            
     │
     ├── Makefile           <- Makefile with commands to automate installation of python environment
