@@ -415,18 +415,24 @@ dist_calc = """
 
 div_head = """
 <h1 class="h1">TimeString</h1>
-<div style="font-size:12px; font-family:helvetica; color:grey; margin-left: 40px; width: 900px; float: left;">
-<p>
-An interactive time series explorer using Bokeh and D3.js. Select a segment
-of the time series to analysis. 
+<div style="font-size:12px; font-family:helvetica; color:grey; margin-left: 40px; width: 700px; float: left;">
 
-</p><p>
+<p>
+An interactive time series explorer using <a href="https://bokeh.org/" target="_blank" class="url">Bokeh</a> and <a href="https://d3js.org/" target="_blank" class="url">D3.js</a>. 
+This is a static standalone Bokeh dashboard. All computations are performed client side using javascript. 
+Select a segment of the time series to analyze. 
+</p>
+
+<p>
 Features:
 <ul>
 <li>Runs linear regression for all variables in the selected segment</li>
-<li>Sort variables by trend over selected segment, number of upper/lower control limit violations</li>
-<li>Calculate <a href="https://en.wikipedia.org/wiki/Dynamic_time_warping" class="url">Dynamic Time Wrapping<a> or Euclidean distance for selected variable segment against all other variables</li>
-<li>Compute agglomerative <a href="https://en.wikipedia.org/wiki/Hierarchical_clustering#:~:text=In%20data%20mining%20and%20statistics,build%20a%20hierarchy%20of%20clusters." class="url">heirarchical clustering</a> for selected segments and display results in a d3.js dendogram</li>
+<li>Sort by regression slope over selected segments, number of upper/lower control limit violations etc. using the data table</li>
+<li>Calculate <a href="https://en.wikipedia.org/wiki/Dynamic_time_warping" target="_blank" class="url">Dynamic Time Wrapping<a> or Euclidean distance for selected variable segment against all other variables. 
+You may then sort by distance to identify most similar segments</li>
+<li>Compute agglomerative <a href="https://en.wikipedia.org/wiki/Hierarchical_clustering#:~:text=In%20data%20mining%20and%20statistics,build%20a%20hierarchy%20of%20clusters." target="_blank" class="url">heirarchical clustering</a> for selected segments and display 
+results in a d3.js dendogram</li>
+<li>Click on dendogram leaf to inspect corresponding segment</li>
 </ul>
 </p>
 </div>
