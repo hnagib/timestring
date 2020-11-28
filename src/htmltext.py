@@ -418,8 +418,8 @@ div_head = """
 <div style="font-size:12px; font-family:helvetica; color:grey; margin-left: 40px; width: 700px; float: left;">
 
 <p>
-An interactive time series explorer using <a href="https://bokeh.org/" target="_blank" class="url">Bokeh</a> and <a href="https://d3js.org/" target="_blank" class="url">D3.js</a>. 
-This is a static standalone Bokeh dashboard. All computations are performed client side using javascript. 
+An interactive time series exploration tool built using <a href="https://bokeh.org/" target="_blank" class="url">Bokeh</a> and <a href="https://d3js.org/" target="_blank" class="url">D3.js</a>.
+This is served as a static standalone Bokeh dashboard. All computations are performed client side using javascript. 
 Select a segment of the time series to analyze. 
 </p>
 
