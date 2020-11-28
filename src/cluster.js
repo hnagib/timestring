@@ -135,10 +135,10 @@ function deepIterator (target, labels) {
   else {
   	target['name'] = labels[target['id']]
     delete target['left']
-	delete target['right']
-	delete target['id']
-	delete target['vec']
-	delete target['distance']
+  	delete target['right']
+  	delete target['id']
+  	delete target['vec']
+  	delete target['distance']
   }
 }
 
