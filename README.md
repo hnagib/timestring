@@ -2,7 +2,7 @@
 
 Interactive time series visualization using Bokeh and D3.js. Check out a live demo [here](https://hnagib.com/ts-cluster). The applet can be useful for finding patterns in large sets of timeseries data. 
 
-Features: 
+### Features: 
 - Runs linear regression for all variables in the selected segment
 - Sort variables by trend over selected segment, number of upper/lower control limit violations
 - Calculate Dynamic Time Wrapping distance for selected variable segment against all other variables
