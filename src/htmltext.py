@@ -257,7 +257,7 @@ sum_calc = """
             }
             
             // In sufficient data selected
-            if (inds.length <= 1) {return}
+            if (inds.length <= 1) {alert("Select a segment of the time series using the box select tool"); return;}
             
             else {
                 for (var key in var_meta) {
@@ -323,7 +323,7 @@ dist_calc = """
             }
             
             // In sufficient data selected
-            if (inds.length <= 1) {return}
+            if (inds.length <= 1) {alert("Select a segment of the time series using the box select tool"); return;}
             
             else {
                 for (var key in var_meta) {
@@ -332,7 +332,7 @@ dist_calc = """
                     y_comp = []
 
                     for (var i = 0; i < inds.length; i++) {
-                        y.push(data[key][inds[i]])                        
+                        y.push(data[key][inds[i]])                         
                         y_comp.push(data[select.value][inds[i]])                        
                     } 
                     
