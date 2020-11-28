@@ -79,8 +79,8 @@ template = """
 </html>
 """
 
-plot_cluster = """
 
+plot_cluster = """
 if (select_dist.value == "dtw"){var clust = hcluster(selected_data["y"],dtwDist)}
 else if (select_dist.value == "euclid"){var clust = hcluster(selected_data["y"],euclid)}
 
@@ -243,24 +243,24 @@ sum_calc = """
             var y_norm = []
             var x = []
             
-            var summary_data = {
+            var summary_data = {{
                 "variable":[], 
                 "slope":[],
                 "usl":[],
                 "lsl":[],
                 "dist":[]
-            }
+            }}
             
-            var selected_data = {
+            var selected_data = {{
                 "variable":[],
                 "y":[]
-            }
+            }}
             
             // In sufficient data selected
-            if (inds.length <= 1) {alert("Select a segment of the time series using the box select tool"); return;}
+            if (inds.length <= 1) {{ {alert} return;}}
             
-            else {
-                for (var key in var_meta) {
+            else {{
+                for (var key in var_meta) {{
 
                     x = []
                     y = []
@@ -269,7 +269,7 @@ sum_calc = """
                     
                     y_comp = []
 
-                    for (var i = 0; i < inds.length; i++) {
+                    for (var i = 0; i < inds.length; i++) {{
                         y.push(data[key][inds[i]])
                         
                         y_comp.push(data[select.value][inds[i]])
@@ -278,7 +278,7 @@ sum_calc = """
                         y_lsl_breach.push(data[key][inds[i]] <= data[key+"_lsl"][inds[i]])
                         
                         x.push([1, inds[i]])
-                    } 
+                    }} 
                     
                     
                     m = jStat.models.ols(y,x).coef[1];     
@@ -292,9 +292,9 @@ sum_calc = """
                     selected_data["variable"].push(key)
                     selected_data["y"].push(y)
                                         
-                }
+                }}
             
-            }
+            }}
             cds_selection_summary_data.data["variable"] = summary_data["variable"]
             cds_selection_summary_data.data["slope"] = summary_data["slope"]
             cds_selection_summary_data.data["usl"] = summary_data["usl"]
@@ -306,6 +306,8 @@ sum_calc = """
 
 
 dist_calc = """
+            if (cds_tsplot.selected.indices.length <= 1) {alert("Select a segment of the time series using the box select tool"); return;}
+
             const inds = cds_tsplot.selected.indices;
             const data = cds_tsplot.data;
             var dist = 0
@@ -323,7 +325,7 @@ dist_calc = """
             }
             
             // In sufficient data selected
-            if (inds.length <= 1) {alert("Select a segment of the time series using the box select tool"); return;}
+            if (inds.length <= 1) {return}
             
             else {
                 for (var key in var_meta) {
