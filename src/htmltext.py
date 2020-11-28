@@ -425,15 +425,13 @@ Select a segment of the time series to analyze.
 
 <p>
 Features:
-<ul>
-<li>Runs linear regression for all variables in the selected segment</li>
-<li>Sort by regression slope over selected segments, number of upper/lower control limit violations etc. using the data table</li>
-<li>Calculate <a href="https://en.wikipedia.org/wiki/Dynamic_time_warping" target="_blank" class="url">Dynamic Time Wrapping<a> or Euclidean distance for selected variable segment against all other variables. 
-You may then sort by distance to identify most similar segments</li>
-<li>Compute agglomerative <a href="https://en.wikipedia.org/wiki/Hierarchical_clustering#:~:text=In%20data%20mining%20and%20statistics,build%20a%20hierarchy%20of%20clusters." target="_blank" class="url">heirarchical clustering</a> for selected segments and display 
-results in a d3.js dendogram</li>
-<li>Click on dendogram leaf to inspect corresponding segment</li>
-</ul>
+  <ul>
+    <li>Runs linear regression for all variables over the selected segment to identify trends</li>
+    <li>Sort by regression slope over selected segments, number of upper/lower control limit violations, etc. using the data table</li>
+    <li>Calculate <a href="https://en.wikipedia.org/wiki/Dynamic_time_warping" target="_blank" class="url">Dynamic Time Wrapping<a> or Euclidean distance for the selected variable segment against all other variables. You may then sort by distance to identify the most similar segments</li>
+    <li>Compute agglomerative <a href="https://en.wikipedia.org/wiki/Hierarchical_clustering#:~:text=In%20data%20mining%20and%20statistics,build%20a%20hierarchy%20of%20clusters." target="_blank" class="url">heirarchical clustering</a> for selected segments and display results in a d3.js dendrogram</li>
+    <li>Click on dendrogram leaf to inspect the corresponding segment</li>
+  </ul>
 </p>
 </div>
 """
