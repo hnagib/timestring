@@ -1,0 +1,207 @@
+.pointer {
+style=color: transparent; 
+background-color: transparent; 
+border-color: transparent;
+}
+
+.bk {
+    style=font-family:helvetica;
+    font-size:12px; 
+    color:grey; 
+}
+.text {
+    style=font-family:helvetica; 
+    color:grey; 
+    float: left;
+    margin-top: 10px; 
+}
+
+.h1 {
+    style=font-family:helvetica; 
+    color:grey; 
+    font-size:28px; 
+    font-weight:bold;
+    margin-top: 10px; 
+}
+
+.h {
+    style=font-family:helvetica; 
+    color:grey; 
+    font-size:16px; 
+    font-weight:bold;
+    margin-top: 10px; 
+}
+
+.para {
+    style=font-family:helvetica;
+    font-size:12px; 
+    color:grey; 
+    margin-left: 40px; 
+    width: 400px; 
+    float: left;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  
+}
+
+.tooltip .tooltiptext {
+  visibility: visible;
+  width: 100px;
+  background-color: #555;
+  color: #fff;
+  font-family:helvetica;
+  font-size: 12x;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 20%;
+  left: 50%;
+  margin-left: 20px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  margin-left: 25px;
+  opacity: 0.5;
+}
+
+.fa {
+  padding: 10px;
+  font-size:200px;
+  width: 10px;
+  text-align: center;
+  text-decoration: none;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+  opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+.fa-facebook {
+  background: transparent;
+  color: #3B5998;
+}
+
+.fa-linkedin {
+  background: transparent;
+  color: #007bb5;
+}
+
+.fa-instagram {
+  background: transparent;
+  color: red;
+}
+
+.fa-twitter {
+background: transparent;
+color: #55ACEE;
+}
+
+.fa-github {
+  background: transparent;
+  color: black;
+}
+
+.fa-envelope {
+  background: transparent;
+  color: red;
+}
+
+.fa-file {
+  background: transparent;
+  color: blue;
+}
+
+a.url:link {
+  color: #e73360;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a.url:visited {
+  color: #e73360;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a.url:hover {
+  color: #154ba6;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a.url:active {
+  color: #e73360;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.node {
+        cursor: pointer;
+    }
+
+.node circle {
+  fill: #43658B;
+  stroke: #495464;
+  stroke-width: 3px;
+}
+
+.node text {
+  font: 12px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #BBBFCA;
+  stroke-width: 6px;
+}
+
+.navbar .nav-link a:hover {
+color: #e73360 !important;
+}
+
+.navbar .dropdown-menu a:hover {
+color: #e73360 !important;
+}
+
+.navbar .dropdown-menu a:active {
+color: #e73360;
+background-color: transparent;
+}
+
+li.nav-item a:hover { 
+  color: #e73360 !important;
+  background-color: transparent; 
+}
+
+.d3-tip {
+  border-radius: 30px;
+  background:rgba(255,255,255,0.0);
+}
+
+
+p {
+  font-family: Helvetica;
+}

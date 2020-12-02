@@ -4,4 +4,4 @@ scipy==1.5.4
 ipywidgets==6.0.0
 bokeh==2.2.3
 matplotlib==3.3.3
-faker==4.17.1
+yahoo-finance==1.4.0

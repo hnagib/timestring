@@ -1,292 +1,114 @@
+from bokeh.models.widgets import Div
+
+div_space = '<div style="width: {width}px; height: {height}px;"></div>'
+
+def space(width, height=0):
+    return Div(text=div_space.format(width=width, height=height))
+
+
 template = """
-<!DOCTYPE html>
-<html lang="en">
-{% block head %}
-  	<!-- Load d3.js -->
-    <script src="https://d3js.org/d3.v4.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
-    <script src="dtw.js"></script>
-    <script src="cluster.js"></script>
-    
-<head>
-    {% block inner_head %}
-    <meta charset="utf-8">
-
+  <!DOCTYPE html>
+  <html lang="en">
+  {% block head %}
+      
   <head>
-    <style>
-    .h1 {
-    style=font-family:helvetica; 
-    color:grey; 
-    font-size:28px; 
-    font-weight:bold;
-    margin-top: 10px; 
-    }
-    .text {
-        style=font-family:helvetica; 
-        color:grey; 
-        float: left;
-        margin-top: 10px; 
-    }
-    .h2 {
-        style=font-family:helvetica; 
-        color:grey; 
-        font-size:16px; 
-        font-weight:bold;
-        margin-top: 10px; 
-    }
+      {% block inner_head %}
+      <meta charset="utf-8">
+  
 
-    .para {
-        style=font-family:helvetica;
-        font-size:12px; 
-        color:grey; 
-        margin-left: 40px; 
-        width: 400px; 
-        float: left;
-    }
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- Social icon CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Load d3.js & d3 tip-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+        <!-- Stats library -->
+        <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+        
+        <!-- local JS modules -->
+        <script src="dtw.js"></script>
+        <script src="cluster.js"></script>
+        <script src="plot_cluster.js"></script>
 
-    .node {
-        cursor: pointer;
-    }
 
-    .node circle {
-      fill: #43658B;
-      stroke: #495464;
-      stroke-width: 3px;
-    }
+        <link rel="stylesheet" href="style.css">
 
-    .node text {
-      font: 12px sans-serif;
-    }
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" style=" font-size:16px font-family:helvetica; color:grey;" href="https://www.hnagib.com">Home<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" style=" font-size:16px font-family:helvetica; color:grey;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Projects
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" style=" font-size:16px font-family:helvetica; color:grey;" href="https://www.hnagib.com/ts-cluster">TimeString</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
 
-    .link {
-      fill: none;
-      stroke: #BBBFCA;
-      stroke-width: 3px;
-    }
-
-    a.url:link {
-      color: #e73360;
-      background-color: transparent;
-      text-decoration: none;
-    }
-
-    a.url:visited {
-      color: #e73360;
-      background-color: transparent;
-      text-decoration: none;
-    }
-
-    a.url:hover {
-      color: #154ba6;
-      background-color: transparent;
-      text-decoration: none;
-    }
-
-    a.url:active {
-      color: #e73360;
-      background-color: transparent;
-      text-decoration: underline;
-    }
-    
-    </style>
-
-  </head>
 
   <body>
+      
+      
+    </body>
 
-<!-- load the d3.js library --> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
-    
-    
+      <title>{% block title %}{{ title | e if title else "Bokeh Plot" }}{% endblock %}</title>
+      {% block preamble %}{% endblock %}
+      {% block resources %}
+          {% block css_resources %}
+          {{ bokeh_css | indent(8) if bokeh_css }}
+          {% endblock %}
+          {% block js_resources %}
+          {{ bokeh_js | indent(8) if bokeh_js }}
+          {% endblock %}
+      {% endblock %}
+      {% block postamble %}{% endblock %}
+      {% endblock %}
+  </head>
+  {% endblock %}
+  {% block body %}
+  <body>
+  <div style="font-size:12px; font-family:helvetica; color:grey; margin-left: 40px; width: 900px; float: left;">
+      {% block inner_body %}
+      {% block contents %}
+          {% for doc in docs %}
+          {{ embed(doc) if doc.elementid }}
+          {% for root in doc.roots %}
+              {{ embed(root) | indent(10) }}
+          {% endfor %}
+          {% endfor %}
+      {% endblock %}
+      {{ plot_script | indent(8) }}
+      {% endblock %}
+  </div>
   </body>
-
-    <title>{% block title %}{{ title | e if title else "Bokeh Plot" }}{% endblock %}</title>
-    {% block preamble %}{% endblock %}
-    {% block resources %}
-        {% block css_resources %}
-        {{ bokeh_css | indent(8) if bokeh_css }}
-        {% endblock %}
-        {% block js_resources %}
-        {{ bokeh_js | indent(8) if bokeh_js }}
-        {% endblock %}
-    {% endblock %}
-    {% block postamble %}{% endblock %}
-    {% endblock %}
-</head>
-{% endblock %}
-{% block body %}
-<body>
-<div style="font-size:12px; font-family:helvetica; color:grey; margin-left: 40px; width: 900px; float: left;">
-    {% block inner_body %}
-    {% block contents %}
-        {% for doc in docs %}
-        {{ embed(doc) if doc.elementid }}
-        {% for root in doc.roots %}
-            {{ embed(root) | indent(10) }}
-        {% endfor %}
-        {% endfor %}
-    {% endblock %}
-    {{ plot_script | indent(8) }}
-    {% endblock %}
-</div>
-</body>
-{% endblock %}
-</html>
+  {% endblock %}
+  </html>
 """
 
 
 plot_cluster = """
-if (select_dist.value == "dtw"){var clust = hcluster(selected_data["y"],dtwDist)}
-else if (select_dist.value == "euclid"){var clust = hcluster(selected_data["y"],euclid)}
+  if (select_dist.value == "dtw"){var clust = hcluster(selected_data["y"],dtwDist)}
+  else if (select_dist.value == "euclid"){var clust = hcluster(selected_data["y"],euclid)}
 
-var labels = selected_data["variable"]
-
-deepIterator(clust, labels)
-var treeData = [clust]
-
-// ************** Generate the tree diagram  *****************
-d3.select("svg").remove();
-
-var margin = {top: 20, right: 120, bottom: 20, left: 120},
-    width = 2000 - margin.right - margin.left,
-    height = 1000 - margin.top - margin.bottom;
-    
-var i = 0,
-    duration = 1200,
-    root;
-
-var tree = d3.layout.tree()
-    .size([height, width]);
-
-var diagonal = d3.svg.diagonal()
-    .projection(function(d) { return [d.y, d.x]; });
-
-var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.right + margin.left)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-root = treeData[0];
-root.x0 = height / 2;
-root.y0 = 0;
+  var labels = selected_data["variable"]
+  deepIterator(clust, labels)
   
-update(root);
-
-d3.select(self.frameElement).style("height", "100px");
-
-function update(source) {
-
-  // Compute the new tree layout.
-  var nodes = tree.nodes(root).reverse(),
-      links = tree.links(nodes);
-
-  // Normalize for fixed-depth.
-  nodes.forEach(function(d) { d.y = d.depth * 100; });
-
-  // Update the nodes…
-  var node = svg.selectAll("g.node")
-      .data(nodes, function(d) { return d.id || (d.id = ++i); });
-
-  // Enter any new nodes at the parent's previous position.
-  var nodeEnter = node.enter().append("g")
-      .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-      .on("click", click);
-
-  nodeEnter.append("circle")
-      .attr("r", 1e-6)
-      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#BBBFCA"; })
-      .on("click", click_leaf);
-
-  nodeEnter.append("text")
-      .attr("x", function(d) { return d.children || d._children ? -13 : 13; })
-      .attr("dy", ".35em")
-      .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-      .text(function(d) { return d.name; })
-      .style("fill-opacity", 1e-6);
-
-  // Transition nodes to their new position.
-  var nodeUpdate = node.transition()
-      .duration(duration)
-      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
-
-  nodeUpdate.select("circle")
-      .attr("r", 10)
-      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#BBBFCA"; });
-
-  nodeUpdate.select("text")
-      .style("fill-opacity", 1);
-
-  // Transition exiting nodes to the parent's new position.
-  var nodeExit = node.exit().transition()
-      .duration(duration)
-      .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
-      .remove();
-
-  nodeExit.select("circle")
-      .attr("r", 1e-6);
-
-  nodeExit.select("text")
-      .style("fill-opacity", 1e-6);
-
-  // Update the links…
-  var link = svg.selectAll("path.link")
-      .data(links, function(d) { return d.target.id; });
-
-  // Enter any new links at the parent's previous position.
-  link.enter().insert("path", "g")
-      .attr("class", "link")
-      .attr("d", function(d) {
-        var o = {x: source.x0, y: source.y0};
-        return diagonal({source: o, target: o});
-      });
-
-  // Transition links to their new position.
-  link.transition()
-      .duration(duration)
-      .attr("d", diagonal);
-
-  // Transition exiting nodes to the parent's new position.
-  link.exit().transition()
-      .duration(duration)
-      .attr("d", function(d) {
-        var o = {x: source.x, y: source.y};
-        return diagonal({source: o, target: o});
-      })
-      .remove();
-
-  // Stash the old positions for transition.
-  nodes.forEach(function(d) {
-    d.x0 = d.x;
-    d.y0 = d.y;
-  });
-}
-
-// Toggle children on click.
-function click(d) {
-  if (d.children) {
-    d._children = d.children;
-    d.children = null;
-  } else {
-    d.children = d._children;
-    d._children = null;
-  }
-  update(d);
-}
-
-// Toggle children on click.
-function click_leaf(d) {
-  if (d.children) {
-    
-  } else {
-    console.log("--->"+d["name"])
-    if(d["name"] != "") {select.value = d["name"]}
-  }
-  update(d);
-}
-
-
+  plot_cluster(clust, var_meta, select)
 """
 
 sum_calc = """
@@ -299,7 +121,8 @@ sum_calc = """
             var x = []
             
             var summary_data = {{
-                "variable":[], 
+                "variable":[],
+                "group":[], 
                 "slope":[],
                 "usl":[],
                 "lsl":[],
@@ -319,10 +142,10 @@ sum_calc = """
 
                     x = []
                     y = []
-                    y_usl_breach = []
-                    y_lsl_breach = []
+                    var y_usl_breach = []
+                    var y_lsl_breach = []
                     
-                    y_comp = []
+                    var y_comp = []
 
                     for (var i = 0; i < inds.length; i++) {{
                         y.push(data[key][inds[i]])
@@ -339,6 +162,7 @@ sum_calc = """
                     m = jStat.models.ols(y,x).coef[1];     
                     
                     summary_data["variable"].push(key)
+                    summary_data["group"].push(var_meta[key]["category"])
                     summary_data["slope"].push(parseFloat((m*inds.length).toFixed(3)))
                     summary_data["usl"].push(y_usl_breach.filter((value) => value).length)
                     summary_data["lsl"].push(y_lsl_breach.filter((value) => value).length)
@@ -351,6 +175,7 @@ sum_calc = """
             
             }}
             cds_selection_summary_data.data["variable"] = summary_data["variable"]
+            cds_selection_summary_data.data["group"] = summary_data["group"]
             cds_selection_summary_data.data["slope"] = summary_data["slope"]
             cds_selection_summary_data.data["usl"] = summary_data["usl"]
             cds_selection_summary_data.data["lsl"] = summary_data["lsl"]
@@ -386,7 +211,7 @@ dist_calc = """
                 for (var key in var_meta) {
 
                     y = []                    
-                    y_comp = []
+                    var y_comp = []
 
                     for (var i = 0; i < inds.length; i++) {
                         y.push(data[key][inds[i]])                         
@@ -414,24 +239,56 @@ dist_calc = """
 
 
 div_head = """
-<h1 class="h1">TimeString</h1>
-<div style="font-size:12px; font-family:helvetica; color:grey; margin-left: 40px; width: 700px; float: left;">
+<div style="font-size:12px; font-family:helvetica; color:grey; margin-left: 0px; width: 900px; float: left;">
 
 <p>
 An interactive time series exploration tool built using <a href="https://bokeh.org/" target="_blank" class="url">Bokeh</a> and <a href="https://d3js.org/" target="_blank" class="url">D3.js</a>.
-This is served as a static standalone Bokeh dashboard. All computations are performed client side using javascript. 
-Select a segment of the time series to analyze. 
+This is a static standalone Bokeh dashboard with all the data embedded in the .html file. All computations and interactive callsbacks are happening client side using javascript. 
+The interactive analysis approach shown here can be useful for detecting patterns and anomalies in multivariate time series. Here I have visualized the S&P100 stock prices.
 </p>
 
 <p>
-Features:
+Use the box select tool in the plot below to select a segment of the time series to analyze:
   <ul>
-    <li>Runs linear regression for all variables over the selected segment to identify trends</li>
-    <li>Sort by regression slope over selected segments, number of upper/lower control limit violations, etc. using the data table</li>
-    <li>Calculate <a href="https://en.wikipedia.org/wiki/Dynamic_time_warping" target="_blank" class="url">Dynamic Time Wrapping<a> or Euclidean distance for the selected variable segment against all other variables. You may then sort by distance to identify the most similar segments</li>
-    <li>Compute agglomerative <a href="https://en.wikipedia.org/wiki/Hierarchical_clustering#:~:text=In%20data%20mining%20and%20statistics,build%20a%20hierarchy%20of%20clusters." target="_blank" class="url">heirarchical clustering</a> for selected segments and display results in a d3.js dendrogram</li>
-    <li>Click on dendrogram leaf to inspect the corresponding segment</li>
+    <li>
+      Run linear regression for all variables over the selected segment to identify trends. I used the 
+      <a href="https://cdnjs.com/libraries/jstat" class="url" target="_blank">jstat</a> library for this
+    </li>
+    
+    <li>
+      Sort by regression slope over selected segments, number of upper/lower control limit violations, etc. using the data table
+    </li>
+    
+    <li>
+      Calculate <a href="https://en.wikipedia.org/wiki/Dynamic_time_warping" target="_blank" class="url">Dynamic Time Wrapping<a> or Euclidean distance for the selected variable segment against all other variables. You may then sort by distance to identify the most similar segments
+      The dynamic time wrapping implementation was taken from Gordon Lesti's <a class="url" target="_blank" href="https://github.com/GordonLesti/dynamic-time-warping">work</a>
+    </li>
+    
+    <li>
+      Compute agglomerative <a href="https://en.wikipedia.org/wiki/Hierarchical_clustering#:~:text=In%20data%20mining%20and%20statistics,build%20a%20hierarchy%20of%20clusters." target="_blank" class="url">heirarchical clustering</a> for selected segments and display results in a d3.js dendrogram.
+      The clustering implementation was adapted from Stephen Oni's <a class="url" target="_blank" href="https://becominghuman.ai/hierarchical-clustering-in-javascript-brief-introduction-2f88e8601362">work.</a>
+      Segment amplitudes are normalized to be between 0 and 1 prior to distance calculation and clustering
+    </li>
+    
+    <li>
+      The d3 dendrogram code was adapted from Mike Bostock's <a target="_blank" class="url" href="https://bl.ocks.org/d3noob/8375092">blog</a>
+      Hover over parent nodes to see the average shape of for a given cluster overlayed on top of shapes from all child nodes. 
+      This can be useful for understanding what all the child nodes have in common and how homogenous a given cluster is
+    </li>
   </ul>
-</p>
+
+
+</div>
+"""
+
+
+div_social = """
+<div class="header" style="style=font-size:12px; font-family:helvetica; color:grey; margin-left: 0px; margin-bottom: 0px; width: 400px; float: left;">
+ <a href="https://www.linkedin.com/in/hnagib?_l=en_US" target="_blank" class="fa fa-linkedin" style="font-size:24px"></a>
+ <a href="https://github.com/hnagib" class="fa fa-github" target="_blank" style="font-size:24px"></a>
+ <a href="https://www.facebook.com/bigannasah/" target="_blank" class="fa fa-facebook" style="font-size:24px"></a>
+ <a href="https://www.instagram.com/hnagib/" target="_blank" class="fa fa-instagram" style="font-size:24px"></a>
+ <a href="https://twitter.com/HasanNagib/" target="_blank" class="fa fa-twitter" style="font-size:24px"></a>
+ <a href="mailto:hasan.nagib@gmail.com?subject = Hasan's fitness data blog&body = Hello!" class="fa fa-envelope" style="font-size:24px"></a>
 </div>
 """

@@ -124,11 +124,19 @@ function deepIterator (target, labels) {
     	deepIterator(target['left'], labels)
     	deepIterator(target['right'], labels)
     	target['name'] = ''
-    	target['children'] = [target['left'], target['right']] 
+      //console.log(target['left']['name'])
+      //console.log(target['right']['name'])
+      
+      target['vec'] = [target['vec']]
+      target['vec'].push(target['left']['vec']) 
+      target['vec'].push(target['right']['vec']) 
+
+    	
+      target['children'] = [target['left'], target['right']] 
     	delete target['left']
     	delete target['right']
     	delete target['id']
-    	delete target['vec']
+    	//delete target['vec']
     	delete target['distance']
   } 
 
@@ -137,11 +145,37 @@ function deepIterator (target, labels) {
     delete target['left']
   	delete target['right']
   	delete target['id']
-  	delete target['vec']
+  	//delete target['vec']
   	delete target['distance']
   }
 }
 
+
+function flatten(array, mutable) {
+    var toString = Object.prototype.toString;
+    var arrayTypeStr = '[object Array]';
+    
+    var result = [];
+    var nodes = (mutable && array) || array.slice();
+    var node;
+
+    if (!array.length) {
+        return result;
+    }
+
+    node = nodes.pop();
+    
+    do {
+        if (toString.call(node) === arrayTypeStr) {
+            nodes.push.apply(nodes, node);
+        } else {
+            result.push(node);
+        }
+    } while (nodes.length && (node = nodes.pop()) !== undefined);
+
+    result.reverse(); // we reverse result to restore the original order
+    return result;
+}
 
 
 
