@@ -2,6 +2,8 @@
 
 Interactive time series visualization using Bokeh and D3.js. Check out a live demo using S&P100 stock price data [here](https://hnagib.com/ts-cluster). This tool can help you quickly identify patterns in large sets of time series data.   
 
+![demo](https://github.com/hnagib/timestring/blob/master/img/demo.png)
+
 ### Features: 
 - Runs linear regression for all variables in the selected segment
 - Sort variables by trend over selected segment, number of upper/lower control limit violations
