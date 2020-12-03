@@ -48,7 +48,7 @@ function plot_cluster(treeData, var_meta, select) {
   var tool_tip = d3.tip()
   .attr("class", "d3-tip")
   .offset([-35, 10])
-  .html("<p></p><div id='banana'></div>");
+  .html("<div id='var_meta'></div><div id='banana'></div>");
 
   svg.call(tool_tip)
 
@@ -57,7 +57,7 @@ function plot_cluster(treeData, var_meta, select) {
   var nodeEnter = node.enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-      .on("mouseover", function(d) {tipplot(d, tool_tip)})
+      .on("mouseover", function(d) {tipplot(d, tool_tip, var_meta)})
       .on("mouseout", tool_tip.hide)
       .on("click", click)
 
@@ -159,7 +159,7 @@ function plot_cluster(treeData, var_meta, select) {
 }
 
 
-function tipplot(d, tool_tip) {
+function tipplot(d, tool_tip, var_meta) {
 
       tool_tip.show()
       
@@ -202,15 +202,15 @@ function tipplot(d, tool_tip) {
       
       var tipSVG = d3.select("#banana")
         .append("svg")
-        .attr("width", 2000)
-        .attr("height", 1000);
+        .attr("width", 400)
+        .attr("height", 100);
 
       for (var j = 0; j < hover_ys_list.length; j++) {
         
         lineData = []
         
         for (var k = 0; k < hover_ys_list[j].length; k++) {
-          lineData.push({"x":(200*(k+1))/(hover_ys_list[j].length), "y":10+80*(1-norm(hover_ys_list[j])[k])})
+          lineData.push({"x":(50+(300*(k+1))/(hover_ys_list[j].length)), "y":10+80*(1-norm(hover_ys_list[j])[k])})
         }
 
         
@@ -234,7 +234,7 @@ function tipplot(d, tool_tip) {
       hover_y = test
 
       for (var i = 0; i < hover_y.length; i++) {
-        lineData.push({"x":(200*(i+1))/(hover_y.length), "y":10+80*(1-hover_y[i])})
+        lineData.push({"x":(50+(300*(i+1))/(hover_y.length)), "y":10+80*(1-hover_y[i])})
       }
       
       //This is the accessor function we talked about above
@@ -251,5 +251,15 @@ function tipplot(d, tool_tip) {
       .style("opacity", .9)
       .attr("fill", "none");
 
-      //console.log(lineData)
+      document.getElementById("var_meta").innerHTML = `
+      <br></br>
+      <p class='hovertext'>
+      <ul>
+      <li><b>Name</b>: ${var_meta[d["name"]]["desc"]}</li>
+      <li><b>Category</b>: ${var_meta[d["name"]]["category"]}</li>
+      </ul>
+      </p>
+      `
   }
+
+
