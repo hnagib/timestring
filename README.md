@@ -6,9 +6,10 @@ Interactive time series visualization using Bokeh and D3.js. Check out a live de
 
 ### Features: 
 - Runs linear regression for all variables in the selected segment
-- Sort variables by trend over selected segment, number of upper/lower control limit violations
 - Calculate Dynamic Time Wrapping or Eucledian distance for selected variable segment against all other variables
+- Sort variables by trend, number of control limit violations, similarity (dtw or Eucledian distance) etc. 
 - Compute agglomerative heirarchical clustering for selected segments and display results in an interactive d3.js dendogram
+- Hover over nodes to visualize shapes of all time sereis segments in a given cluster
 
 :open_file_folder: Repo Organization
 --------------------------------
