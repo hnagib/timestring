@@ -260,7 +260,7 @@ Use the box select tool in the plot below to select a segment of the time series
     </li>
     
     <li>
-      Calculate <a href="https://en.wikipedia.org/wiki/Dynamic_time_warping" target="_blank" class="url">Dynamic Time Wrapping<a> or Euclidean distance for the selected variable segment against all other variables. You may then sort by distance to identify the most similar segments
+      Calculate <a href="https://en.wikipedia.org/wiki/Dynamic_time_warping" target="_blank" class="url">dynamic time warping<a> or Euclidean distance for the selected variable segment against all other variables. You may then sort by distance to identify the most similar segments
       The dynamic time wrapping implementation was taken from Gordon Lesti's <a class="url" target="_blank" href="https://github.com/GordonLesti/dynamic-time-warping">work</a>
     </li>
     
@@ -271,7 +271,7 @@ Use the box select tool in the plot below to select a segment of the time series
     </li>
     
     <li>
-      The d3 dendrogram code was adapted from Mike Bostock's <a target="_blank" class="url" href="https://bl.ocks.org/d3noob/8375092">blog</a>
+      The d3 dendrogram code was adapted from Mike Bostock's <a target="_blank" class="url" href="https://bl.ocks.org/d3noob/8375092">blog</a>.
       Hover over parent nodes to see the average shape of for a given cluster overlayed on top of shapes from all child nodes. 
       This can be useful for understanding what all the child nodes have in common and how homogenous a given cluster is
     </li>

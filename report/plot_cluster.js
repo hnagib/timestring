@@ -177,7 +177,7 @@ function tipplot(d, tool_tip) {
         var i,j,temparray, avgarray, chunk = hover_y.length;
         for (i=0,j=hover_ys_long.length; i<j; i+=chunk) {
             temparray = hover_ys_long.slice(i,i+chunk);
-            hover_ys_list.push(temparray)
+            hover_ys_list.push(norm(temparray))
         }
 
         var test = []
@@ -231,7 +231,7 @@ function tipplot(d, tool_tip) {
 
 
       lineData = []
-      hover_y = norm(test)
+      hover_y = test
 
       for (var i = 0; i < hover_y.length; i++) {
         lineData.push({"x":(200*(i+1))/(hover_y.length), "y":10+80*(1-hover_y[i])})
