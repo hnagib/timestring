@@ -1,11 +1,9 @@
 function plot_cluster(treeData, var_meta, select) {
 
-
   d3.select("svg").remove();
   d3.select(".d3-tip").remove();
 
-  var tool_tip = d3.tip()
-  .attr("class", "d3-tip")
+  var tool_tip = d3.tip().attr("class", "d3-tip")
   .offset([-35, 10])
   .html("<div id='var_meta'></div><div id='banana'></div>");
 
@@ -29,7 +27,7 @@ function plot_cluster(treeData, var_meta, select) {
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-      .call(tool_tip)
+      .call(tool_tip);
 
   root = treeData;
   root.x0 = height / 2;
@@ -196,20 +194,20 @@ function tipplot(d, tool_tip, var_meta) {
       }
       else {
         var hover_y = norm(d['vec'])
-        var test = norm(df['vec'])
+        var test = norm(d['vec'])
       }
       
       var tipSVG = d3.select("#banana")
         .append("svg")
         .attr("width", 400)
-        .attr("height", 100);
+        .attr("height", 200);
 
       for (var j = 0; j < hover_ys_list.length; j++) {
         
         lineData = []
         
         for (var k = 0; k < hover_ys_list[j].length; k++) {
-          lineData.push({"x":(50+(300*(k+1))/(hover_ys_list[j].length)), "y":10+80*(1-norm(hover_ys_list[j])[k])})
+          lineData.push({"x":(50+(300*(k+1))/(hover_ys_list[j].length)), "y":10+180*(1-norm(hover_ys_list[j])[k])})
         }
 
         
@@ -233,7 +231,7 @@ function tipplot(d, tool_tip, var_meta) {
       hover_y = test
 
       for (var i = 0; i < hover_y.length; i++) {
-        lineData.push({"x":(50+(300*(i+1))/(hover_y.length)), "y":10+80*(1-hover_y[i])})
+        lineData.push({"x":(50+(300*(i+1))/(hover_y.length)), "y":10+180*(1-hover_y[i])})
       }
       
       //This is the accessor function we talked about above
@@ -260,5 +258,3 @@ function tipplot(d, tool_tip, var_meta) {
       </p>
       `
   }
-
-
