@@ -28,7 +28,7 @@ function plot_cluster(treeData, var_meta, select) {
       .attr("width", width + margin.right + margin.left)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
       .call(tool_tip)
 
   root = treeData;
